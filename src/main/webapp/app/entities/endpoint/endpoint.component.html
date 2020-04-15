@@ -1,0 +1,75 @@
+<div>
+    <h2 id="page-heading">
+        <span>Endpoints</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-endpoint" [routerLink]="['/endpoint/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Endpoint
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="endpoints">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span>Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="url"><span>Url</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="method"><span>Method</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="properties"><span>Properties</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="resourceId"><span>Resource</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let endpoint of endpoints ;trackBy: trackId">
+                <td><a [routerLink]="['/endpoint', endpoint.id, 'view' ]">{{endpoint.id}}</a></td>
+                <td>{{endpoint.name}}</td>
+                <td>{{endpoint.url}}</td>
+                <td>{{endpoint.method}}</td>
+                <td>{{endpoint.properties}}</td>
+                <td>
+                    <div *ngIf="endpoint.resourceId">
+                        <a [routerLink]="['../resource', endpoint.resourceId , 'view' ]" >{{endpoint.resourceId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/endpoint', endpoint.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/endpoint', endpoint.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'endpoint/'+ endpoint.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="endpoints && endpoints.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

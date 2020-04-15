@@ -1,0 +1,91 @@
+<div>
+    <h2 id="page-heading">
+        <span>Acc Ns Sessions</span>
+        <!--
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-acc-ns-session" [routerLink]="['/acc-ns-session/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Acc Ns Session
+            </span>
+        </button>
+        -->
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="accNsSessions">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="manoId"><span>Mano Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="manoUser"><span>Mano User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="manoProject"><span>Mano Project</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nsId"><span>Ns Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nsName"><span>Ns Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="timestampStart"><span>Timestamp Start</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="timestampStop"><span>Timestamp Stop</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="qualityProfile"><span>Quality Profile</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="resourceCost"><span>Resource Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="optimisation"><span>Optimisation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="catalogUserId"><span>Catalog User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let accNsSession of accNsSessions ;trackBy: trackId">
+                <td><a [routerLink]="['/acc-ns-session', accNsSession.id, 'view' ]">{{accNsSession.id}}</a></td>
+                <td>{{accNsSession.manoId}}</td>
+                <td>{{accNsSession.manoUser}}</td>
+                <td>{{accNsSession.manoProject}}</td>
+                <td>{{accNsSession.nsId}}</td>
+                <td>{{accNsSession.nsName}}</td>
+                <td>{{accNsSession.timestampStart | dateFormatter}}</td>
+                <td>{{accNsSession.timestampStop | dateFormatter}}</td>
+                <td>{{accNsSession.qualityProfile}}</td>
+                <td>{{accNsSession.resourceCost}}</td>
+                <td>{{accNsSession.optimisation}}</td>
+                <td>
+                    <div *ngIf="accNsSession.catalogUserId">
+                        <a [routerLink]="['../catalog-user', accNsSession.catalogUserId , 'view' ]" >{{accNsSession.catalogUserId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/acc-ns-session', accNsSession.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <!--
+                        <button type="submit"
+                                [routerLink]="['/acc-ns-session', accNsSession.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'acc-ns-session/'+ accNsSession.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                        -->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="accNsSessions && accNsSessions.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

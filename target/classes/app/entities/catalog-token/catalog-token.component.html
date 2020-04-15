@@ -1,0 +1,92 @@
+<div>
+    <!--
+    <h2 id="page-heading">
+        <span>Catalog Tokens</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-catalog-token" [routerLink]="['/catalog-token/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Catalog Token
+            </span>
+        </button>
+    </h2>
+    -->
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="catalogTokens">
+        <table class="table table-striped">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <!--<th jhiSortBy="value"><span>Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                    <th jhiSortBy="type"><span>Type</span> <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="timestampCreated"><span>Timestamp Created</span> <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="timestampExpiration"><span>Timestamp Expiration</span> <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="valid"><span>Valid</span> <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="catalogUserId"><span>Catalog User</span> <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let catalogToken of catalogTokens ;trackBy: trackId">
+                    <td><a [routerLink]="['/catalog-token', catalogToken.id, 'view' ]">{{catalogToken.id}}</a></td>
+                    <!--<td>{{catalogToken.value}}</td>-->
+                    <td>{{catalogToken.type}}</td>
+                    <td>{{catalogToken.timestampCreated | dateFormatter}}</td>
+                    <td>{{catalogToken.timestampExpiration | dateFormatter}}</td>
+
+                    <td>
+                        <ng-template #tooltipContentValid>Click to invalidate</ng-template>
+                        <button class="btn btn-danger btn-sm" *ngIf="!catalogToken.valid">no</button>
+                        <button [ngbTooltip]="tooltipContentValid" class="btn btn-success btn-sm" (click)="setValid(catalogToken, false)" *ngIf="catalogToken.valid">ok</button>
+                    </td>
+                    <td>
+                        <ng-template #tooltipContent>CatalogUser name: <b>{{userData}}</b></ng-template>
+                        <div *ngIf="catalogToken.catalogUserId">
+                            <a on-mouseover="this.loadUserByID(catalogToken.catalogUserId)" [ngbTooltip]="tooltipContent" [routerLink]="['../catalog-user', catalogToken.catalogUserId , 'view' ]">{{catalogToken.catalogUserId}}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit" [routerLink]="['/catalog-token', catalogToken.id, 'view' ]" class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+                            <!--
+                        <button type="submit"
+                                [routerLink]="['/catalog-token', catalogToken.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'catalog-token/'+ catalogToken.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                        -->
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="catalogTokens && catalogTokens.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-endpoint-heading">Create or edit a Endpoint</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!endpoint.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="endpoint.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="endpoint.name" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_url">Url</label>
+                    <input type="text" class="form-control" name="url" id="field_url"
+                        [(ngModel)]="endpoint.url" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.url?.dirty && editForm.controls.url?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.url?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.url?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_method">Method</label>
+                    <input type="text" class="form-control" name="method" id="field_method"
+                        [(ngModel)]="endpoint.method" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.method?.dirty && editForm.controls.method?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.method?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.method?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_properties">Properties</label>
+                    <input type="text" class="form-control" name="properties" id="field_properties"
+                        [(ngModel)]="endpoint.properties" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_resource">Resource</label>
+                    <select class="form-control" id="field_resource" name="resource" [(ngModel)]="endpoint.resourceId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="resourceOption.id" *ngFor="let resourceOption of resources; trackBy: trackResourceById">{{resourceOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

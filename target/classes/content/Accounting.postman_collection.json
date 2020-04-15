@@ -1,0 +1,591 @@
+{
+	"info": {
+		"_postman_id": "07cae5d1-a16b-4a12-9c16-5d5783eae3ca",
+		"name": "AAA Accounting API",
+		"description": "high level cycle to send accounting data to AAA\n\nlogin to AAA\n\nfor each VNF\n   open session \n   for each VDU (VM/FaaS)\n      logConsumption (sending a \"NEW\" event)\n      while VDU is active\n         for each resource monitored (CPU, memory, disk)\n            logConsumption of the resource\n         endfor\n      endwhile\n      logConsumption (sending a \"REMOVED\" event)\n   endfor\n   close session\nendfor\n\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d1fa5a43-6436-41d8-a3f5-b4013dc1228a",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body contains id_token\"] = responseBody.has(\"id_token\");",
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.id_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"{{user}}\",\"password\":\"{{pass}}\"}"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/authenticate",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getVersion",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/accounting/version",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounting",
+						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "availableUserResourceList",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/accounting/availableUserResourceList",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounting",
+						"availableUserResourceList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "openNsSession",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "60be3f41-a982-47a0-8e1f-0d78b46e0d5b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"NS session opened successfully\"] = responseBody > 0;",
+							"postman.setEnvironmentVariable(\"nsSessionID\", responseBody);"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"catalog_tenant\": \"default\",\n  \"catalog_user\": \"catdev1\",\n  \"mano_id\": \"mano.osm4.eng.1\",\n  \"mano_project\": \"admin\",\n  \"mano_user\": \"osmr4user1\",\n  \"ns_id\": \"myid1\",\n  \"ns_name\": \"myname1\"\n}\n"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/accounting/openNsSession",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounting",
+						"openNsSession"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "openVnfSession",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b15c688-5328-44e4-8503-6dc6741b1114",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"VNF session opened successfully\"] = responseBody > 0;",
+							"postman.setEnvironmentVariable(\"vnfSessionID\", responseBody);"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"ns_session_id\": \"{{nsSessionID}}\",\n  \"vnf_id\": \"myvndid1\",\n  \"vnf_name\": \"my vnf name 1\"\n}\n\n"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/accounting/openVnfSession",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounting",
+						"openVnfSession"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "openVduSession",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e97d28cf-b3cf-4274-ac59-195b60d069f8",
+						"exec": [
+							"tests[\"VDU session opened successfully\"] = responseBody > 0;",
+							"postman.setEnvironmentVariable(\"vduSessionID\", responseBody);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"flavorCpuCount\": \"1\",\n  \"flavorMemoryMb\": \"2048\",\n  \"flavorDiskGb\": \"3\",\n  \"vnf_session_id\": \"{{vnfSessionID}}\",\n  \"nfvipop_id\": \"openstack.ocata.eng\",\n  \"vdu_id\": \"myvdu id 1\",\n  \"vdu_type\": \"PLAIN_VNF\"\n}\n\n"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/accounting/openVduSession",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounting",
+						"openVduSession"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logVDUConsumption - CPU",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"consumption_type\": \"CPU_CYCLE\",\n  \"consumption_value\": 7777,\n  \"vdu_session_id\": \"{{vduSessionID}}\"\n}\n"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/accounting/logVduConsumption?",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounting",
+						"logVduConsumption"
+					],
+					"query": [
+						{
+							"key": "consumptionType",
+							"value": "MEMORY_MB",
+							"description": "CPU_CYCLE, MEMORY_MB, DISK_GB",
+							"disabled": true
+						},
+						{
+							"key": "value",
+							"value": "12345",
+							"description": "numeric value",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logVDUConsumption - MEMORY",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"consumption_type\": \"MEMORY_MB\",\n  \"consumption_value\": 777,\n  \"vdu_session_id\": \"{{vduSessionID}}\"\n}\n"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/accounting/logVduConsumption?",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounting",
+						"logVduConsumption"
+					],
+					"query": [
+						{
+							"key": "consumptionType",
+							"value": "MEMORY_MB",
+							"description": "CPU_CYCLE, MEMORY_MB, DISK_GB",
+							"disabled": true
+						},
+						{
+							"key": "value",
+							"value": "12345",
+							"description": "numeric value",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logVDUConsumption - DISK",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"consumption_type\": \"DISK_GB\",\n  \"consumption_value\": 77,\n  \"vdu_session_id\": \"{{vduSessionID}}\"\n}\n"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/accounting/logVduConsumption?",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounting",
+						"logVduConsumption"
+					],
+					"query": [
+						{
+							"key": "consumptionType",
+							"value": "MEMORY_MB",
+							"description": "CPU_CYCLE, MEMORY_MB, DISK_GB",
+							"disabled": true
+						},
+						{
+							"key": "value",
+							"value": "12345",
+							"description": "numeric value",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "closeVduSession",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"{{vduSessionID}}\"\n}\n\n"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/accounting/closeVduSession",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounting",
+						"closeVduSession"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "closeVnfSession",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"{{vnfSessionID}}\"\n}\n\n"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/accounting/closeVnfSession",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounting",
+						"closeVnfSession"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "closeNsSession",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"{{nsSessionID}}\"\n}\n\n"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/accounting/closeNsSession",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounting",
+						"closeNsSession"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "eb24cd9b-c1a9-49cb-8bb6-0dee0c999198",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5e546415-ed77-4447-9386-2d0ccdb523e2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="catalogUser">
+            <h2><span>Catalog User</span> {{catalogUser.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{catalogUser.name}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{catalogUser.description}}</span>
+                </dd>
+                <dt><span>User credentials/roles</span></dt>
+                <dd>
+                    <span>
+                        <ng-template #tooltipContent>User: <b>{{userData}}</b></ng-template>
+                        <div *ngIf="catalogUser.userId">
+                            <a on-mouseover="this.loadUserByID(catalogUser.userId)" [ngbTooltip]="tooltipContent">{{catalogUser.userId}}</a>
+                        </div>
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button" [routerLink]="['/catalog-user', catalogUser.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

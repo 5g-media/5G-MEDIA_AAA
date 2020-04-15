@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="accNsSessionNetwork">
+            <h2><span>Acc Ns Session Network</span> {{accNsSessionNetwork.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Timestamp</span></dt>
+                <dd>
+                    <span>{{accNsSessionNetwork.timestamp | dateFormatter}}</span>
+                </dd>
+                <dt><span>Nfvipop Id</span></dt>
+                <dd>
+                    <span>{{accNsSessionNetwork.nfvipopId}}</span>
+                </dd>
+                <dt><span>Max Bandwidth Mbps</span></dt>
+                <dd>
+                    <span>{{accNsSessionNetwork.maxBandwidthMbps}}</span>
+                </dd>
+                <dt><span>Used Bandwidth Mbps</span></dt>
+                <dd>
+                    <span>{{accNsSessionNetwork.usedBandwidthMbps}}</span>
+                </dd>
+                <dt><span>Session Length Sec</span></dt>
+                <dd>
+                    <span>{{accNsSessionNetwork.sessionLengthSec}}</span>
+                </dd>
+                <dt><span>Acc Ns Session</span></dt>
+                <dd>
+                    <div *ngIf="accNsSessionNetwork.accNsSessionId">
+                        <a [routerLink]="['/acc-ns-session', accNsSessionNetwork.accNsSessionId, 'view']">{{accNsSessionNetwork.accNsSessionId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+            <!--
+            <button type="button"
+                    [routerLink]="['/acc-ns-session-network', accNsSessionNetwork.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+            -->
+        </div>
+    </div>
+</div>

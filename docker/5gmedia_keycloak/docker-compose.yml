@@ -1,0 +1,36 @@
+version: '3'
+
+volumes:
+  mysql_data:
+      driver: local
+
+services:
+  mysql:
+      image: mysql:5.7
+      volumes:
+        - mysql_data:/var/lib/mysql
+      ports:
+      - 8306:3306
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: keycloak
+        MYSQL_USER: keycloak
+        MYSQL_PASSWORD: password
+  keycloak:
+      image: jboss/keycloak:4.5.0.Final
+      command: ["-Dkeycloak.migration.action=import", "-Dkeycloak.migration.provider=dir", "-Dkeycloak.migration.dir=/opt/jboss/keycloak/realm-config", "-Dkeycloak.migration.strategy=OVERWRITE_EXISTING"]
+      volumes:
+        - ./realm-config:/opt/jboss/keycloak/realm-config
+      environment:
+        DB_VENDOR: MYSQL
+        DB_ADDR: mysql
+        DB_DATABASE: keycloak
+        DB_USER: keycloak
+        DB_PASSWORD: password
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: 5gmedia
+        #JDBC_PARAMS: "connectTimeout=30000"
+      ports:
+        - 8080:8080
+      depends_on:
+        - mysql

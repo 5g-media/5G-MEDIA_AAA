@@ -1,0 +1,155 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-quality-profile-heading">Create or edit a Quality Profile</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!qualityProfile.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="qualityProfile.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="qualityProfile.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_minBitrateKbps">Min Bitrate Kbps</label>
+                    <input type="number" class="form-control" name="minBitrateKbps" id="field_minBitrateKbps"
+                        [(ngModel)]="qualityProfile.minBitrateKbps" required/>
+                    <div [hidden]="!(editForm.controls.minBitrateKbps?.dirty && editForm.controls.minBitrateKbps?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.minBitrateKbps?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.minBitrateKbps?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_maxBitrateKbps">Max Bitrate Kbps</label>
+                    <input type="number" class="form-control" name="maxBitrateKbps" id="field_maxBitrateKbps"
+                        [(ngModel)]="qualityProfile.maxBitrateKbps" required/>
+                    <div [hidden]="!(editForm.controls.maxBitrateKbps?.dirty && editForm.controls.maxBitrateKbps?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.maxBitrateKbps?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.maxBitrateKbps?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_minCompressionLevel">Min Compression Level</label>
+                    <input type="number" class="form-control" name="minCompressionLevel" id="field_minCompressionLevel"
+                        [(ngModel)]="qualityProfile.minCompressionLevel" required/>
+                    <div [hidden]="!(editForm.controls.minCompressionLevel?.dirty && editForm.controls.minCompressionLevel?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.minCompressionLevel?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.minCompressionLevel?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_maxCompressionLevel">Max Compression Level</label>
+                    <input type="number" class="form-control" name="maxCompressionLevel" id="field_maxCompressionLevel"
+                        [(ngModel)]="qualityProfile.maxCompressionLevel" required/>
+                    <div [hidden]="!(editForm.controls.maxCompressionLevel?.dirty && editForm.controls.maxCompressionLevel?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.maxCompressionLevel?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.maxCompressionLevel?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_meanEntropyTI">Mean Entropy TI</label>
+                    <input type="number" class="form-control" name="meanEntropyTI" id="field_meanEntropyTI"
+                        [(ngModel)]="qualityProfile.meanEntropyTI" required/>
+                    <div [hidden]="!(editForm.controls.meanEntropyTI?.dirty && editForm.controls.meanEntropyTI?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.meanEntropyTI?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.meanEntropyTI?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_meanEntropySI">Mean Entropy SI</label>
+                    <input type="number" class="form-control" name="meanEntropySI" id="field_meanEntropySI"
+                        [(ngModel)]="qualityProfile.meanEntropySI" required/>
+                    <div [hidden]="!(editForm.controls.meanEntropySI?.dirty && editForm.controls.meanEntropySI?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.meanEntropySI?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.meanEntropySI?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_minExpectedQOE">Min Expected QOE</label>
+                    <input type="number" class="form-control" name="minExpectedQOE" id="field_minExpectedQOE"
+                        [(ngModel)]="qualityProfile.minExpectedQOE" required/>
+                    <div [hidden]="!(editForm.controls.minExpectedQOE?.dirty && editForm.controls.minExpectedQOE?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.minExpectedQOE?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.minExpectedQOE?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_maxExpectedQOE">Max Expected QOE</label>
+                    <input type="number" class="form-control" name="maxExpectedQOE" id="field_maxExpectedQOE"
+                        [(ngModel)]="qualityProfile.maxExpectedQOE" required/>
+                    <div [hidden]="!(editForm.controls.maxExpectedQOE?.dirty && editForm.controls.maxExpectedQOE?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.maxExpectedQOE?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.maxExpectedQOE?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

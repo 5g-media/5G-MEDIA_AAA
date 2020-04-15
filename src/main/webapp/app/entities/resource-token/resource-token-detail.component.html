@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="resourceToken">
+            <h2><span>Resource Token</span> {{resourceToken.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Value</span></dt>
+                <dd>
+                    <span>{{resourceToken.value}}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{resourceToken.type}}</span>
+                </dd>
+                <dt><span>Timestamp Created</span></dt>
+                <dd>
+                    <span>{{resourceToken.timestampCreated | dateFormatter}}</span>
+                </dd>
+                <dt><span>Timestamp Expiration</span></dt>
+                <dd>
+                    <span>{{resourceToken.timestampExpiration | dateFormatter}}</span>
+                </dd>
+                <dt><span>Valid</span></dt>
+                <dd>
+                    <span>{{resourceToken.valid}}</span>
+                </dd>
+                <dt><span>Resource User</span></dt>
+                <dd>
+                    <div *ngIf="resourceToken.resourceUserId">
+                        <a [routerLink]="['/resource-user', resourceToken.resourceUserId, 'view']">{{resourceToken.resourceUserId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+            <!--
+            <button type="button"
+                    [routerLink]="['/resource-token', resourceToken.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+            -->
+        </div>
+    </div>
+</div>

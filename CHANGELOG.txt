@@ -1,0 +1,30 @@
+Fivegmedia 3A 
+
+version 0.0.6 (2020.01.10)
+
+support to GPU
+support to MON session tracking
+
+
+version 0.0.5 (2019.03.29)
+
+support for OIDC configuration on Keycloak.
+OSM      10.20.0.108
+DevStack 10.20.0.25
+
+Scenario 1: 
+OSM "v5.0.5 - good" + devstack + update MySQL:resource row:7 auth_driver -> DriverOSMr5  
+ResourceUser:7 -> Edit -> assign/deassign ResourceUserLogin:7
+ResourceUser:8 -> Edit -> assign/deassign ResourceUserLogin:8 -> assign/deassign MANO:7 
+
+Scenario 2: 
+OSM "patched with containers + osm real: working!" + devstack (10.20.0.25) + 
+
+update MySQL:
+resource row:7 auth_driver -> DriverOSMr5Keycloak
+resource_admin_login:7 username -> osmrealmadmin
+   
+ResourceUser:7 -> Edit -> assign/deassign ResourceUserLogin:7
+ResourceUser:8 -> Edit -> assign/deassign ResourceUserLogin:8 -> assign/deassign MANO:7 
+
+

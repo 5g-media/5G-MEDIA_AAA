@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="resourceUser">
+            <h2><span>Resource User</span> {{resourceUser.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{resourceUser.name}}</span>
+                </dd>
+                <dt><span>Project</span></dt>
+                <dd>
+                    <span>{{resourceUser.tenant}}</span>
+                </dd>
+                <dt><span>Permissions</span></dt>
+                <dd>
+                    <span>{{resourceUser.permissions}}</span>
+                </dd>
+                <dt><span>MANO</span></dt>
+                <dd>
+                    <span>{{resourceUser.groupname}}</span>
+                </dd>
+                <dt><span>Enabled</span></dt>
+                <dd>
+                    <span>{{resourceUser.enabled}}</span>
+                </dd>
+                <dt><span>Resource User Login</span></dt>
+                <dd>
+                    <div *ngIf="resourceUser.resourceUserLoginId">
+                        <a [routerLink]="['/resource-user-login', resourceUser.resourceUserLoginId, 'view']">{{resourceUser.resourceUserLoginId}}</a>
+                    </div>
+                </dd>
+                <dt [ngbTooltip]="tooltipContentCatalogue">
+                    <ng-template #tooltipContentCatalogue>Catalogue name: <b>{{catalogueUserData}}</b></ng-template>
+                    <span>Resource</span></dt>
+                <dd>
+                    <div *ngIf="resourceUser.resourceId">
+                        <a [routerLink]="['/resource', resourceUser.resourceId, 'view']">{{resourceUser.resourceId}}</a>
+                    </div>
+                </dd>
+                <dt><span>Catalog User</span></dt>
+                <dd>
+                    <div *ngIf="resourceUser.catalogUserId">
+                        <a [routerLink]="['/catalog-user', resourceUser.catalogUserId, 'view']">{{resourceUser.catalogUserId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/resource-user', resourceUser.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

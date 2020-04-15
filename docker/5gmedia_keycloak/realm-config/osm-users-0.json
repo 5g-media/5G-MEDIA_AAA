@@ -1,0 +1,131 @@
+{
+  "realm" : "osm",
+  "users" : [ {
+    "id" : "e4bf219f-15bd-47a0-a748-f6b0958dfe3f",
+    "createdTimestamp" : 1561380045145,
+    "username" : "mediauser1",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "attributes" : {
+      "project" : [ "ten1", "ten2" ]
+    },
+    "credentials" : [ {
+      "type" : "password",
+      "hashedSaltedValue" : "GZmt9Ij/R89oxJ8zZf1P5YAqifCHyqeSrfbSIYQ/PJbcgh6Vs+V8G3ObTOc6aOgIQHqR3YliuYnRTvpsF+p6mg==",
+      "salt" : "fmnOrPFVLraq8Mwh8N1DQQ==",
+      "hashIterations" : 27500,
+      "counter" : 0,
+      "algorithm" : "pbkdf2-sha256",
+      "digits" : 0,
+      "period" : 0,
+      "createdDate" : 1561380045185,
+      "config" : { }
+    } ],
+    "disableableCredentialTypes" : [ "password" ],
+    "requiredActions" : [ ],
+    "clientRoles" : {
+      "catalognxw" : [ "ROLE_SERVICE_COMPOSER" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "f00ccf27-0a33-483b-8cc3-ac8ab23cb406",
+    "createdTimestamp" : 1561387437213,
+    "username" : "mediauser2",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "credentials" : [ {
+      "type" : "password",
+      "hashedSaltedValue" : "y59QD4pdVyVJnTUgyyxcXBEhE+IqjEqowrO+ii5PiKxqgMmJVHq1xmo+weMGTVr5kziTm6DJEvALW043f6qTQA==",
+      "salt" : "BssQqUhGSxXnMLO8RVsUWw==",
+      "hashIterations" : 27500,
+      "counter" : 0,
+      "algorithm" : "pbkdf2-sha256",
+      "digits" : 0,
+      "period" : 0,
+      "createdDate" : 1561387437246,
+      "config" : { }
+    } ],
+    "disableableCredentialTypes" : [ "password" ],
+    "requiredActions" : [ ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "2c1ff1fa-65f8-40f8-95c6-8c6b2a81fa59",
+    "createdTimestamp" : 1553874420572,
+    "username" : "osmrealmadmin",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "credentials" : [ {
+      "type" : "password",
+      "hashedSaltedValue" : "5LI1gMvYy4zn+GqeMvXntUekdgmtzj7V7bt8PJRws6xuZlhiGHqXO21ZSKrdxFVZtxVxa67J4uFQAt5D8m6bXQ==",
+      "salt" : "/4wX+USKXcIudk+xwognUw==",
+      "hashIterations" : 27500,
+      "counter" : 0,
+      "algorithm" : "pbkdf2-sha256",
+      "digits" : 0,
+      "period" : 0,
+      "createdDate" : 1553874724002,
+      "config" : { }
+    } ],
+    "disableableCredentialTypes" : [ "password" ],
+    "requiredActions" : [ ],
+    "clientRoles" : {
+      "realm-management" : [ "realm-admin" ],
+      "osm1" : [ "admin" ],
+      "osm2" : [ "admin" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "784a5113-05b9-4443-a406-098c158d253b",
+    "createdTimestamp" : 1560842574050,
+    "username" : "service-account-realm-management",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "email" : "service-account-realm-management@placeholder.org",
+    "serviceAccountClientId" : "realm-management",
+    "credentials" : [ ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "clientRoles" : {
+      "realm-management" : [ "uma_protection" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "1436155d-a172-42f9-8fa1-edb61a3cbced",
+    "createdTimestamp" : 1559572181330,
+    "username" : "test1",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "attributes" : {
+      "project" : [ "myProject" ]
+    },
+    "credentials" : [ {
+      "type" : "password",
+      "hashedSaltedValue" : "iVLUKYw08RwvAJucK7hmSEL8GI4iVt0eXnOxnmHkvtYkz0Q0ls/KE45ZW2VvWRt5gIkjavGL7Jg0izr6D40Y5A==",
+      "salt" : "rhhQ1J8NwBtRYXZxt4vaQg==",
+      "hashIterations" : 27500,
+      "counter" : 0,
+      "algorithm" : "pbkdf2-sha256",
+      "digits" : 0,
+      "period" : 0,
+      "createdDate" : 1559572188823,
+      "config" : { }
+    } ],
+    "disableableCredentialTypes" : [ "password" ],
+    "requiredActions" : [ ],
+    "clientRoles" : {
+      "catalog1" : [ "ROLE_ADMIN" ],
+      "catalog2" : [ "ROLE_SERVICE_ADMIN" ]
+    },
+    "notBefore" : 1559575052,
+    "groups" : [ ]
+  } ]
+}

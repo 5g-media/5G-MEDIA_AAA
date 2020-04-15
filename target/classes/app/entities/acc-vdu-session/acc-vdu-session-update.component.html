@@ -1,0 +1,121 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-acc-vdu-session-heading">Create or edit a Acc Vdu Session</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!accVduSession.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="accVduSession.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vduId">Vdu Id</label>
+                    <input type="text" class="form-control" name="vduId" id="field_vduId"
+                        [(ngModel)]="accVduSession.vduId" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.vduId?.dirty && editForm.controls.vduId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.vduId?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.vduId?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nfvipopId">Nfvipop Id</label>
+                    <input type="text" class="form-control" name="nfvipopId" id="field_nfvipopId"
+                        [(ngModel)]="accVduSession.nfvipopId" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.nfvipopId?.dirty && editForm.controls.nfvipopId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nfvipopId?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nfvipopId?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_flavorCpuCount">Flavor cpu count</label>
+                    <input type="text" class="form-control" name="flavorCpuCount" id="field_flavor_cpu_count"
+                        [(ngModel)]="accVduSession.flavorCpuCount" maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.flavorCpuCount?.dirty && editForm.controls.flavorCpuCount?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.flavorCpuCount?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_flavorMemoryMb">Flavor memory mb</label>
+                    <input type="text" class="form-control" name="flavorMemoryMb" id="field_flavor_memory_mb"
+                        [(ngModel)]="accVduSession.flavorMemoryMb" maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.flavorMemoryMb?.dirty && editForm.controls.flavorMemoryMb?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.flavorMemoryMb?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_flavorDiskGb">Flavor disk gb</label>
+                    <input type="text" class="form-control" name="flavorDiskGb" id="field_flavor_disk_gb"
+                        [(ngModel)]="accVduSession.flavorDiskGb" maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.flavorDiskGb?.dirty && editForm.controls.flavorDiskGb?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.flavorDiskGb?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_timestampStart">Timestamp Start</label>
+                    <input type="number" class="form-control" name="timestampStart" id="field_timestampStart"
+                        [(ngModel)]="accVduSession.timestampStart" required/>
+                    <div [hidden]="!(editForm.controls.timestampStart?.dirty && editForm.controls.timestampStart?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.timestampStart?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.timestampStart?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_timestampStop">Timestamp Stop</label>
+                    <input type="number" class="form-control" name="timestampStop" id="field_timestampStop"
+                        [(ngModel)]="accVduSession.timestampStop" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vduTypeEnum">Vdu Type Enum</label>
+                    <select class="form-control" name="vduTypeEnum" [(ngModel)]="accVduSession.vduTypeEnum" id="field_vduTypeEnum" >
+                        <option value="PLAIN_VNF">PLAIN_VNF</option>
+                        <option value="FAAS_VNF">FAAS_VNF</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_accVnfSession">Acc Vnf Session</label>
+                    <select class="form-control" id="field_accVnfSession" name="accVnfSession" [(ngModel)]="accVduSession.accVnfSessionId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="accVnfSessionOption.id" *ngFor="let accVnfSessionOption of accvnfsessions; trackBy: trackAccVnfSessionById">{{accVnfSessionOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

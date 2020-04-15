@@ -1,0 +1,141 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-acc-ns-session-heading">Create or edit a Acc Ns Session</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!accNsSession.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="accNsSession.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_manoId">Mano Id</label>
+                    <input type="text" class="form-control" name="manoId" id="field_manoId"
+                        [(ngModel)]="accNsSession.manoId" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.manoId?.dirty && editForm.controls.manoId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.manoId?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.manoId?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_manoUser">Mano User</label>
+                    <input type="text" class="form-control" name="manoUser" id="field_manoUser"
+                        [(ngModel)]="accNsSession.manoUser" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.manoUser?.dirty && editForm.controls.manoUser?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.manoUser?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.manoUser?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_manoProject">Mano Project</label>
+                    <input type="text" class="form-control" name="manoProject" id="field_manoProject"
+                        [(ngModel)]="accNsSession.manoProject" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.manoProject?.dirty && editForm.controls.manoProject?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.manoProject?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.manoProject?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nsId">Ns Id</label>
+                    <input type="text" class="form-control" name="nsId" id="field_nsId"
+                        [(ngModel)]="accNsSession.nsId" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.nsId?.dirty && editForm.controls.nsId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nsId?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nsId?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nsName">Ns Name</label>
+                    <input type="text" class="form-control" name="nsName" id="field_nsName"
+                        [(ngModel)]="accNsSession.nsName" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.nsName?.dirty && editForm.controls.nsName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nsName?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nsName?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_timestampStart">Timestamp Start</label>
+                    <input type="number" class="form-control" name="timestampStart" id="field_timestampStart"
+                        [(ngModel)]="accNsSession.timestampStart" required/>
+                    <div [hidden]="!(editForm.controls.timestampStart?.dirty && editForm.controls.timestampStart?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.timestampStart?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.timestampStart?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_timestampStop">Timestamp Stop</label>
+                    <input type="number" class="form-control" name="timestampStop" id="field_timestampStop"
+                        [(ngModel)]="accNsSession.timestampStop" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_qualityProfile">Quality Profile</label>
+                    <input type="text" class="form-control" name="qualityProfile" id="field_qualityProfile"
+                        [(ngModel)]="accNsSession.qualityProfile" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_resourceCost">Resource Cost</label>
+                    <input type="number" class="form-control" name="resourceCost" id="field_resourceCost"
+                        [(ngModel)]="accNsSession.resourceCost" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_optimisation">Optimisation</label>
+                    <input type="text" class="form-control" name="optimisation" id="field_optimisation"
+                        [(ngModel)]="accNsSession.optimisation" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_catalogUser">Catalog User</label>
+                    <select class="form-control" id="field_catalogUser" name="catalogUser" [(ngModel)]="accNsSession.catalogUserId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="catalogUserOption.id" *ngFor="let catalogUserOption of catalogusers; trackBy: trackCatalogUserById">{{catalogUserOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

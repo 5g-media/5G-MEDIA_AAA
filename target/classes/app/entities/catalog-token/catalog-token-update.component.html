@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-catalog-token-heading">Create or edit a Catalog Token</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!catalogToken.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="catalogToken.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_value">Value</label>
+                    <input type="text" class="form-control" name="value" id="field_value"
+                        [(ngModel)]="catalogToken.value" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.value?.dirty && editForm.controls.value?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.value?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.value?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_type">Type</label>
+                    <input type="text" class="form-control" name="type" id="field_type"
+                        [(ngModel)]="catalogToken.type" maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.type?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_timestampCreated">Timestamp Created</label>
+                    <input type="number" class="form-control" name="timestampCreated" id="field_timestampCreated"
+                        [(ngModel)]="catalogToken.timestampCreated" required/>
+                    <div [hidden]="!(editForm.controls.timestampCreated?.dirty && editForm.controls.timestampCreated?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.timestampCreated?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.timestampCreated?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_timestampExpiration">Timestamp Expiration</label>
+                    <input type="number" class="form-control" name="timestampExpiration" id="field_timestampExpiration"
+                        [(ngModel)]="catalogToken.timestampExpiration" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_valid">Valid</label>
+                    <input type="checkbox" class="form-control" name="valid" id="field_valid"
+                        [(ngModel)]="catalogToken.valid" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_catalogUser">Catalog User</label>
+                    <select class="form-control" id="field_catalogUser" name="catalogUser" [(ngModel)]="catalogToken.catalogUserId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="catalogUserOption.id" *ngFor="let catalogUserOption of catalogusers; trackBy: trackCatalogUserById">{{catalogUserOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

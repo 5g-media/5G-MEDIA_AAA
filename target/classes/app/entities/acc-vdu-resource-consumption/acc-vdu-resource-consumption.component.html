@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span>Acc Vdu Resource Consumptions</span>
+        <!--
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-acc-vdu-resource-consumption" [routerLink]="['/acc-vdu-resource-consumption/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Acc Vdu Resource Consumption
+            </span>
+        </button>
+        -->
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="accVduResourceConsumptions">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="value"><span>Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="timestamp"><span>Timestamp</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="resourceType"><span>Resource Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="accVduSessionId"><span>Acc Vdu Session</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let accVduResourceConsumption of accVduResourceConsumptions ;trackBy: trackId">
+                <td><a [routerLink]="['/acc-vdu-resource-consumption', accVduResourceConsumption.id, 'view' ]">{{accVduResourceConsumption.id}}</a></td>
+                <td>{{accVduResourceConsumption.value}}</td>
+                <td>{{accVduResourceConsumption.timestamp | dateFormatter}}</td>
+                <td>{{accVduResourceConsumption.resourceType}}</td>
+                <td>
+                    <div *ngIf="accVduResourceConsumption.accVduSessionId">
+                        <a [routerLink]="['../acc-vdu-session', accVduResourceConsumption.accVduSessionId , 'view' ]" >{{accVduResourceConsumption.accVduSessionId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/acc-vdu-resource-consumption', accVduResourceConsumption.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <!--
+                        <button type="submit"
+                                [routerLink]="['/acc-vdu-resource-consumption', accVduResourceConsumption.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'acc-vdu-resource-consumption/'+ accVduResourceConsumption.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                        -->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="accVduResourceConsumptions && accVduResourceConsumptions.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

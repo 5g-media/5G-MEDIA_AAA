@@ -1,0 +1,105 @@
+<div>
+    <h2 id="page-heading">
+        <span>Resources</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-resource" [routerLink]="['/resource/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span>
+                Create new Resource
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="resources">
+        <table class="table table-striped">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    <th jhiSortBy="id">
+                        <span>ID</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="resourceid">
+                        <span>Resourceid</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="name">
+                        <span>Name</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="url">
+                        <span>Url</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="authDriver">
+                        <span>Auth Driver</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="authConf">
+                        <span>Auth Conf</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="properties">
+                        <span>Properties</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="resourceEnum">
+                        <span>Resource Enum</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="resourceAdminLoginId">
+                        <span>Resource Admin Login</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let resource of resources ;trackBy: trackId">
+                    <td>
+                        <a [routerLink]="['/resource', resource.id, 'view' ]">{{resource.id}}</a>
+                    </td>
+                    <td>{{resource.resourceid}}</td>
+                    <td>{{resource.name}}</td>
+                    <td>{{resource.url}}</td>
+                    <td>{{resource.authDriver}}</td>
+                    <td>{{resource.authConf}}</td>
+                    <td>{{resource.properties}}</td>
+                    <td>{{resource.resourceEnum}}</td>
+                    <td>
+                        <ng-template #tooltipContent>Username: <b>{{resourceAdminLoginData}}</b></ng-template>
+                        <div *ngIf="resource.resourceAdminLoginId">
+                            <a on-mouseover="this.loadResourceAdminLoginByID(resource.resourceAdminLoginId)"  [ngbTooltip]="tooltipContent" [routerLink]="['../resource-admin-login', resource.resourceAdminLoginId , 'view' ]">{{resource.resourceAdminLoginId}}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit" [routerLink]="['/resource', resource.id, 'view' ]" class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/resource', resource.id, 'edit']" class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/', { outlets: { popup: 'resource/'+ resource.id + '/delete'} }]" replaceUrl="true"
+                                queryParamsHandling="merge" class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="resources && resources.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

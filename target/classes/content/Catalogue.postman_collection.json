@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "ed55d3dc-4705-4fc9-97a2-29ab602e17b2",
+		"name": "Catalogue",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "580fc635-aef9-441e-a1ee-d2c0488a02ae",
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d1fa5a43-6436-41d8-a3f5-b4013dc1228a",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body contains id_token\"] = responseBody.has(\"id_token\");",
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.id_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"{{user}}\",\"password\":\"{{pass}}\"}"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/authenticate",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "22750460-b94b-4b2c-9a2e-fb6dc1cdfdff",
+			"name": "getVersion",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/catalogue/version",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"catalogue",
+						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "1aa21b4d-1eb1-4978-9f4e-5963997c94be",
+			"name": "availableUserResources",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/catalogue/availableUserResources/{{catalogueTenant}}/{{catalogueUser}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"catalogue",
+						"availableUserResources",
+						"{{catalogueTenant}}",
+						"{{catalogueUser}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "36ca6c5c-d2d2-42c1-a1e1-78c34a75d71d",
+			"name": "getResourceCredentialsByCatalogUserResource - OSMr3",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"catalog_user\": \"catdev1\",\n        \"catalog_tenant\": \"default\",\n        \"resource_id\": \"mano.osm3.eng.1\",\n        \"resource_properties\": \"\"\n}"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/catalogue/getResourceCredentialsByCatalogUserResource",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"catalogue",
+						"getResourceCredentialsByCatalogUserResource"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "d500d801-f7bf-48cc-9dc7-8aa157c5c687",
+			"name": "getResourceCredentialsByCatalogUserResource - OpenStack",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"catalog_user\": \"catdev1\",\n        \"catalog_tenant\": \"default\",\n        \"resource_id\": \"openstack.kilo.eng\",\n        \"resource_properties\": \"\"\n}"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/catalogue/getResourceCredentialsByCatalogUserResource",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"catalogue",
+						"getResourceCredentialsByCatalogUserResource"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

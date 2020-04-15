@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="accNsSession">
+            <h2><span>Acc Ns Session</span> {{accNsSession.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Mano Id</span></dt>
+                <dd>
+                    <span>{{accNsSession.manoId}}</span>
+                </dd>
+                <dt><span>Mano User</span></dt>
+                <dd>
+                    <span>{{accNsSession.manoUser}}</span>
+                </dd>
+                <dt><span>Mano Project</span></dt>
+                <dd>
+                    <span>{{accNsSession.manoProject}}</span>
+                </dd>
+                <dt><span>Ns Id</span></dt>
+                <dd>
+                    <span>{{accNsSession.nsId}}</span>
+                </dd>
+                <dt><span>Ns Name</span></dt>
+                <dd>
+                    <span>{{accNsSession.nsName}}</span>
+                </dd>
+                <dt><span>Timestamp Start</span></dt>
+                <dd>
+                    <span>{{accNsSession.timestampStart | dateFormatter}}</span>
+                </dd>
+                <dt><span>Timestamp Stop</span></dt>
+                <dd>
+                    <span>{{accNsSession.timestampStop | dateFormatter}}</span>
+                </dd>
+                <dt><span>Quality Profile</span></dt>
+                <dd>
+                    <span>{{accNsSession.qualityProfile}}</span>
+                </dd>
+                <dt><span>Resource Cost</span></dt>
+                <dd>
+                    <span>{{accNsSession.resourceCost}}</span>
+                </dd>
+                <dt><span>Optimisation</span></dt>
+                <dd>
+                    <span>{{accNsSession.optimisation}}</span>
+                </dd>
+                <dt><span>Catalog User</span></dt>
+                <dd>
+                    <div *ngIf="accNsSession.catalogUserId">
+                        <a [routerLink]="['/catalog-user', accNsSession.catalogUserId, 'view']">{{accNsSession.catalogUserId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/acc-ns-session', accNsSession.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

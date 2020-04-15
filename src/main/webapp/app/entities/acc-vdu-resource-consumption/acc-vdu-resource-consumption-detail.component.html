@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="accVduResourceConsumption">
+            <h2><span>Acc Vdu Resource Consumption</span> {{accVduResourceConsumption.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Value</span></dt>
+                <dd>
+                    <span>{{accVduResourceConsumption.value}}</span>
+                </dd>
+                <dt><span>Timestamp</span></dt>
+                <dd>
+                    <span>{{accVduResourceConsumption.timestamp | dateFormatter}}</span>
+                </dd>
+                <dt><span>Resource Type</span></dt>
+                <dd>
+                    <span>{{accVduResourceConsumption.resourceType}}</span>
+                </dd>
+                <dt><span>Acc Vdu Session</span></dt>
+                <dd>
+                    <div *ngIf="accVduResourceConsumption.accVduSessionId">
+                        <a [routerLink]="['/acc-vdu-session', accVduResourceConsumption.accVduSessionId, 'view']">{{accVduResourceConsumption.accVduSessionId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+<!--
+            <button type="button"
+                    [routerLink]="['/acc-vdu-resource-consumption', accVduResourceConsumption.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+-->
+
+        </div>
+    </div>
+</div>

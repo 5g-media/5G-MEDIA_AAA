@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="accVduSession">
+            <h2><span>Acc Vdu Session</span> {{accVduSession.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Vdu Id</span></dt>
+                <dd>
+                    <span>{{accVduSession.vduId}}</span>
+                </dd>
+                <dt><span>Nfvipop Id</span></dt>
+                <dd>
+                    <span>{{accVduSession.nfvipopId}}</span>
+                </dd>
+                <dt><span>Flavor cpu count</span></dt>
+                <dd>
+                    <span>{{accVduSession.flavorCpuCount}}</span>
+                </dd>
+                <dt><span>Flavor memory mb</span></dt>
+                <dd>
+                    <span>{{accVduSession.flavorMemoryMb}}</span>
+                </dd>
+                <dt><span>Flavor disk gb</span></dt>
+                <dd>
+                    <span>{{accVduSession.flavorDiskGb}}</span>
+                </dd>
+                <dt><span>Timestamp Start</span></dt>
+                <dd>
+                    <span>{{accVduSession.timestampStart | dateFormatter}}</span>
+                </dd>
+                <dt><span>Timestamp Stop</span></dt>
+                <dd>
+                    <span>{{accVduSession.timestampStop | dateFormatter}}</span>
+                </dd>
+                <dt><span>Vdu Type Enum</span></dt>
+                <dd>
+                    <span>{{accVduSession.vduTypeEnum}}</span>
+                </dd>
+                <dt><span>Acc Vnf Session</span></dt>
+                <dd>
+                    <div *ngIf="accVduSession.accVnfSessionId">
+                        <a [routerLink]="['/acc-vnf-session', accVduSession.accVnfSessionId, 'view']">{{accVduSession.accVnfSessionId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+        <!--
+            <button type="button"
+                    [routerLink]="['/acc-vdu-session', accVduSession.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        -->
+        </div>
+    </div>
+</div>

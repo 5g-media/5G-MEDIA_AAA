@@ -1,0 +1,79 @@
+<div>
+    <h2 id="page-heading">
+        <span>Resource Users for catalog user: {{catalogUser.name}}</span>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="resourceUsers">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span>Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tenant"><span>Tenant</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="permissions"><span>Permissions</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="group"><span>Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enabled"><span>Enabled</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="resourceUserLoginId"><span>Resource User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="resourceId"><span>Resource</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let resourceUser of resourceUsers ;trackBy: trackId">
+                <td><a [routerLink]="['/resource-user', resourceUser.id, 'view' ]">{{resourceUser.id}}</a></td>
+                <td>{{resourceUser.name}}</td>
+                <td>{{resourceUser.tenant}}</td>
+                <td>{{resourceUser.permissions}}</td>
+                <td>{{resourceUser.groupname}}</td>
+                <td>{{resourceUser.enabled}}</td>
+                <td>
+                    <ng-template #tooltipContentResourceUserLogin>Resource user login: <b>{{resourceUserLoginData}}</b></ng-template>
+
+                    <div *ngIf="resourceUser.resourceUserLoginId">
+                        <a on-mouseover="this.loadResourceUserLoginByID(resourceUser.resourceUserLoginId)"  [ngbTooltip]="tooltipContentResourceUserLogin" [routerLink]="['../resource-user-login', resourceUser.resourceUserLoginId , 'view' ]" >{{resourceUser.resourceUserLoginId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <ng-template #tooltipContentResource>Resource name: <b>{{resourceData}}</b></ng-template>
+
+                    <div *ngIf="resourceUser.resourceId">
+                        <a on-mouseover="this.loadResourceByID(resourceUser.resourceId)"  [ngbTooltip]="tooltipContentResource" [routerLink]="['../resource', resourceUser.resourceId , 'view' ]" >{{resourceUser.resourceId}}</a>
+                    </div>
+                </td>
+                
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/resource-user', resourceUser.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/resource-user', resourceUser.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="resourceUsers && resourceUsers.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+    <button type="submit"
+            (click)="navigateBack()"
+            class="btn btn-info">
+        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+    </button>
+</div>

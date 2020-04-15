@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity AccVduResourceConsumption.
+    -->
+    <changeSet id="20180718130638-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="acc_vdu_session_id"
+                                 baseTableName="acc_vdu_resource_consumption"
+                                 constraintName="fk_acc_vdu_resource_consumption_acc_vdu_session_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="acc_vdu_session"/>
+
+    </changeSet>
+</databaseChangeLog>

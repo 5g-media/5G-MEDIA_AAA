@@ -1,0 +1,198 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-acc-ns-session-metrics-heading">Create or edit a Acc Ns Session Metrics</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!accNsSessionMetrics.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="accNsSessionMetrics.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_timestamp">Timestamp</label>
+                    <input type="number" class="form-control" name="timestamp" id="field_timestamp"
+                        [(ngModel)]="accNsSessionMetrics.timestamp" required/>
+                    <div [hidden]="!(editForm.controls.timestamp?.dirty && editForm.controls.timestamp?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.timestamp?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.timestamp?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nfvipopId">Nfvipop Id</label>
+                    <input type="text" class="form-control" name="nfvipopId" id="field_nfvipopId"
+                        [(ngModel)]="accNsSessionMetrics.nfvipopId" required/>
+                    <div [hidden]="!(editForm.controls.nfvipopId?.dirty && editForm.controls.nfvipopId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nfvipopId?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_sessionLengthSec">Session Length Sec</label>
+                    <input type="number" class="form-control" name="sessionLengthSec" id="field_sessionLengthSec"
+                        [(ngModel)]="accNsSessionMetrics.sessionLengthSec" required/>
+                    <div [hidden]="!(editForm.controls.sessionLengthSec?.dirty && editForm.controls.sessionLengthSec?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.sessionLengthSec?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.sessionLengthSec?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_qualityProfile">Quality Profile</label>
+                    <input type="text" class="form-control" name="qualityProfile" id="field_qualityProfile"
+                        [(ngModel)]="accNsSessionMetrics.qualityProfile" required/>
+                    <div [hidden]="!(editForm.controls.qualityProfile?.dirty && editForm.controls.qualityProfile?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.qualityProfile?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_expectedQoe">Expected Qoe</label>
+                    <input type="number" class="form-control" name="expectedQoe" id="field_expectedQoe"
+                        [(ngModel)]="accNsSessionMetrics.expectedQoe" required/>
+                    <div [hidden]="!(editForm.controls.expectedQoe?.dirty && editForm.controls.expectedQoe?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.expectedQoe?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.expectedQoe?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_measuredQoe">Measured Qoe</label>
+                    <input type="number" class="form-control" name="measuredQoe" id="field_measuredQoe"
+                        [(ngModel)]="accNsSessionMetrics.measuredQoe" required/>
+                    <div [hidden]="!(editForm.controls.measuredQoe?.dirty && editForm.controls.measuredQoe?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.measuredQoe?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.measuredQoe?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_entropyTI">Entropy TI</label>
+                    <input type="number" class="form-control" name="entropyTI" id="field_entropyTI"
+                        [(ngModel)]="accNsSessionMetrics.entropyTI" required/>
+                    <div [hidden]="!(editForm.controls.entropyTI?.dirty && editForm.controls.entropyTI?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.entropyTI?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.entropyTI?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_entropySI">Entropy SI</label>
+                    <input type="number" class="form-control" name="entropySI" id="field_entropySI"
+                        [(ngModel)]="accNsSessionMetrics.entropySI" required/>
+                    <div [hidden]="!(editForm.controls.entropySI?.dirty && editForm.controls.entropySI?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.entropySI?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.entropySI?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_compressionLevel">Compression Level</label>
+                    <input type="number" class="form-control" name="compressionLevel" id="field_compressionLevel"
+                        [(ngModel)]="accNsSessionMetrics.compressionLevel" required/>
+                    <div [hidden]="!(editForm.controls.compressionLevel?.dirty && editForm.controls.compressionLevel?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.compressionLevel?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.compressionLevel?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_bandwidthAllocatedMbps">Bandwidth Allocated Mbps</label>
+                    <input type="number" class="form-control" name="bandwidthAllocatedMbps" id="field_bandwidthAllocatedMbps"
+                        [(ngModel)]="accNsSessionMetrics.bandwidthAllocatedMbps" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_bitrateKbps">Bitrate Kbps</label>
+                    <input type="number" class="form-control" name="bitrateKbps" id="field_bitrateKbps"
+                        [(ngModel)]="accNsSessionMetrics.bitrateKbps" required/>
+                    <div [hidden]="!(editForm.controls.bitrateKbps?.dirty && editForm.controls.bitrateKbps?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.bitrateKbps?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.bitrateKbps?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_blur">Blur</label>
+                    <input type="number" class="form-control" name="blur" id="field_blur"
+                        [(ngModel)]="accNsSessionMetrics.blur" required/>
+                    <div [hidden]="!(editForm.controls.blur?.dirty && editForm.controls.blur?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.blur?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.blur?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_userCount">User Count</label>
+                    <input type="number" class="form-control" name="userCount" id="field_userCount"
+                        [(ngModel)]="accNsSessionMetrics.userCount" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_accNsSession">Acc Ns Session</label>
+                    <select class="form-control" id="field_accNsSession" name="accNsSession" [(ngModel)]="accNsSessionMetrics.accNsSessionId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="accNsSessionOption.id" *ngFor="let accNsSessionOption of accnssessions; trackBy: trackAccNsSessionById">{{accNsSessionOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130636_added_entity_AccNsSession.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130637_added_entity_AccVduSession.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130638_added_entity_AccVduResourceConsumption.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130639_added_entity_Endpoint.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130640_added_entity_CatalogToken.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130641_added_entity_Resource.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130642_added_entity_ResourceToken.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130643_added_entity_ResourceAdminLogin.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130644_added_entity_Policy.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130645_added_entity_AccVnfSession.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130646_added_entity_ResourceUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130647_added_entity_ResourceUserLogin.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130648_added_entity_CatalogUser.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20180718130636_added_entity_constraints_AccNsSession.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130637_added_entity_constraints_AccVduSession.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130638_added_entity_constraints_AccVduResourceConsumption.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130639_added_entity_constraints_Endpoint.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130640_added_entity_constraints_CatalogToken.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130641_added_entity_constraints_Resource.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130642_added_entity_constraints_ResourceToken.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130644_added_entity_constraints_Policy.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130645_added_entity_constraints_AccVnfSession.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180718130646_added_entity_constraints_ResourceUser.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+</databaseChangeLog>

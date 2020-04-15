@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-acc-ns-session-network-heading">Create or edit a Acc Ns Session Network</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!accNsSessionNetwork.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="accNsSessionNetwork.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_timestamp">Timestamp</label>
+                    <input type="number" class="form-control" name="timestamp" id="field_timestamp"
+                        [(ngModel)]="accNsSessionNetwork.timestamp" required/>
+                    <div [hidden]="!(editForm.controls.timestamp?.dirty && editForm.controls.timestamp?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.timestamp?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.timestamp?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nfvipopId">Nfvipop Id</label>
+                    <input type="text" class="form-control" name="nfvipopId" id="field_nfvipopId"
+                        [(ngModel)]="accNsSessionNetwork.nfvipopId" required/>
+                    <div [hidden]="!(editForm.controls.nfvipopId?.dirty && editForm.controls.nfvipopId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nfvipopId?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_maxBandwidthMbps">Max Bandwidth Mbps</label>
+                    <input type="number" class="form-control" name="maxBandwidthMbps" id="field_maxBandwidthMbps"
+                        [(ngModel)]="accNsSessionNetwork.maxBandwidthMbps" required/>
+                    <div [hidden]="!(editForm.controls.maxBandwidthMbps?.dirty && editForm.controls.maxBandwidthMbps?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.maxBandwidthMbps?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.maxBandwidthMbps?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_usedBandwidthMbps">Used Bandwidth Mbps</label>
+                    <input type="text" class="form-control" name="usedBandwidthMbps" id="field_usedBandwidthMbps"
+                        [(ngModel)]="accNsSessionNetwork.usedBandwidthMbps" required/>
+                    <div [hidden]="!(editForm.controls.usedBandwidthMbps?.dirty && editForm.controls.usedBandwidthMbps?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.usedBandwidthMbps?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_sessionLengthSec">Session Length Sec</label>
+                    <input type="number" class="form-control" name="sessionLengthSec" id="field_sessionLengthSec"
+                        [(ngModel)]="accNsSessionNetwork.sessionLengthSec" required/>
+                    <div [hidden]="!(editForm.controls.sessionLengthSec?.dirty && editForm.controls.sessionLengthSec?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.sessionLengthSec?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.sessionLengthSec?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_accNsSession">Acc Ns Session</label>
+                    <select class="form-control" id="field_accNsSession" name="accNsSession" [(ngModel)]="accNsSessionNetwork.accNsSessionId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="accNsSessionOption.id" *ngFor="let accNsSessionOption of accnssessions; trackBy: trackAccNsSessionById">{{accNsSessionOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

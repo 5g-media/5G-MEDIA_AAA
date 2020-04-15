@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="accNsSessionMetrics">
+            <h2><span>Acc Ns Session Metrics</span> {{accNsSessionMetrics.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Timestamp</span></dt>
+                <dd>
+                    <span>{{accNsSessionMetrics.timestamp | dateFormatter}}</span>
+                </dd>
+                <dt><span>Nfvipop Id</span></dt>
+                <dd>
+                    <span>{{accNsSessionMetrics.nfvipopId}}</span>
+                </dd>
+                <dt><span>Session Length Sec</span></dt>
+                <dd>
+                    <span>{{accNsSessionMetrics.sessionLengthSec}}</span>
+                </dd>
+                <dt><span>Quality Profile</span></dt>
+                <dd>
+                    <span>{{accNsSessionMetrics.qualityProfile}}</span>
+                </dd>
+                <dt><span>Expected Qoe</span></dt>
+                <dd>
+                    <span>{{accNsSessionMetrics.expectedQoe}}</span>
+                </dd>
+                <dt><span>Measured Qoe</span></dt>
+                <dd>
+                    <span>{{accNsSessionMetrics.measuredQoe}}</span>
+                </dd>
+                <dt><span>Entropy TI</span></dt>
+                <dd>
+                    <span>{{accNsSessionMetrics.entropyTI}}</span>
+                </dd>
+                <dt><span>Entropy SI</span></dt>
+                <dd>
+                    <span>{{accNsSessionMetrics.entropySI}}</span>
+                </dd>
+                <dt><span>Compression Level</span></dt>
+                <dd>
+                    <span>{{accNsSessionMetrics.compressionLevel}}</span>
+                </dd>
+                <dt><span>Bandwidth Allocated Mbps</span></dt>
+                <dd>
+                    <span>{{accNsSessionMetrics.bandwidthAllocatedMbps}}</span>
+                </dd>
+                <dt><span>Bitrate Kbps</span></dt>
+                <dd>
+                    <span>{{accNsSessionMetrics.bitrateKbps}}</span>
+                </dd>
+                <dt><span>Blur</span></dt>
+                <dd>
+                    <span>{{accNsSessionMetrics.blur}}</span>
+                </dd>
+                <dt><span>User Count</span></dt>
+                <dd>
+                    <span>{{accNsSessionMetrics.userCount}}</span>
+                </dd>
+                <dt><span>Acc Ns Session</span></dt>
+                <dd>
+                    <div *ngIf="accNsSessionMetrics.accNsSessionId">
+                        <a [routerLink]="['/acc-ns-session', accNsSessionMetrics.accNsSessionId, 'view']">{{accNsSessionMetrics.accNsSessionId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+            <!--
+            <button type="button"
+                    [routerLink]="['/acc-ns-session-metrics', accNsSessionMetrics.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+            -->
+        </div>
+    </div>
+</div>

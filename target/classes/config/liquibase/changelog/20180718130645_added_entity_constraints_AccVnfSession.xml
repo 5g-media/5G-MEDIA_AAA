@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity AccVnfSession.
+    -->
+    <changeSet id="20180718130645-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="acc_ns_session_id"
+                                 baseTableName="acc_vnf_session"
+                                 constraintName="fk_acc_vnf_session_acc_ns_session_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="acc_ns_session"/>
+
+    </changeSet>
+</databaseChangeLog>

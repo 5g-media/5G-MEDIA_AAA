@@ -1,0 +1,111 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-resource-heading">Create or edit a Resource</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!resource.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="resource.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_resourceid">Resourceid</label>
+                    <input type="text" class="form-control" name="resourceid" id="field_resourceid"
+                        [(ngModel)]="resource.resourceid" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.resourceid?.dirty && editForm.controls.resourceid?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.resourceid?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.resourceid?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="resource.name" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_url">Url</label>
+                    <input type="text" class="form-control" name="url" id="field_url"
+                        [(ngModel)]="resource.url" maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.url?.dirty && editForm.controls.url?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.url?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_authDriver">Auth Driver</label>
+                    <input type="text" class="form-control" name="authDriver" id="field_authDriver"
+                        [(ngModel)]="resource.authDriver" maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.authDriver?.dirty && editForm.controls.authDriver?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.authDriver?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_authConf">Auth Conf</label>
+                    <input type="text" class="form-control" name="authConf" id="field_authConf"
+                        [(ngModel)]="resource.authConf" maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.authConf?.dirty && editForm.controls.authConf?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.authConf?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_properties">Properties</label>
+                    <input type="text" class="form-control" name="properties" id="field_properties"
+                        [(ngModel)]="resource.properties" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_resourceEnum">Resource Enum</label>
+                    <select class="form-control" name="resourceEnum" [(ngModel)]="resource.resourceEnum" id="field_resourceEnum" >
+                        <option value="OSM_R3">OSM_R3</option>
+                        <option value="OSM_R4">OSM_R4</option>
+                        <option value="OSM_R5">OSM_R5</option>
+                        <option value="SDN_CONTROLLER">SDN_CONTROLLER</option>
+                        <option value="OPENSTACK">OPENSTACK</option>
+                        <option value="OPENNEBULA">OPENNEBULA</option>
+                        <option value="FAAS">FAAS</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_resourceAdminLogin">Resource Admin Login</label>
+                    <select class="form-control" id="field_resourceAdminLogin" name="resourceAdminLogin" [(ngModel)]="resource.resourceAdminLoginId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="resourceAdminLoginOption.id" *ngFor="let resourceAdminLoginOption of resourceadminlogins; trackBy: trackResourceAdminLoginById">id: {{resourceAdminLoginOption.id}}, username: {{resourceAdminLoginOption.username}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

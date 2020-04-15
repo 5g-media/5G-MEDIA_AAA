@@ -1,0 +1,79 @@
+<div>
+    <h2 id="page-heading">
+        <span>Quality Profiles</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-quality-profile" [routerLink]="['/quality-profile/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Quality Profile
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="qualityProfiles">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span>Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="minBitrateKbps"><span>Min Bitrate Kbps</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="maxBitrateKbps"><span>Max Bitrate Kbps</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="minCompressionLevel"><span>Min Compression Level</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="maxCompressionLevel"><span>Max Compression Level</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="meanEntropyTI"><span>Mean Entropy TI</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="meanEntropySI"><span>Mean Entropy SI</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="minExpectedQOE"><span>Min Expected QOE</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="maxExpectedQOE"><span>Max Expected QOE</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let qualityProfile of qualityProfiles ;trackBy: trackId">
+                <td><a [routerLink]="['/quality-profile', qualityProfile.id, 'view' ]">{{qualityProfile.id}}</a></td>
+                <td>{{qualityProfile.name}}</td>
+                <td>{{qualityProfile.minBitrateKbps}}</td>
+                <td>{{qualityProfile.maxBitrateKbps}}</td>
+                <td>{{qualityProfile.minCompressionLevel}}</td>
+                <td>{{qualityProfile.maxCompressionLevel}}</td>
+                <td>{{qualityProfile.meanEntropyTI}}</td>
+                <td>{{qualityProfile.meanEntropySI}}</td>
+                <td>{{qualityProfile.minExpectedQOE}}</td>
+                <td>{{qualityProfile.maxExpectedQOE}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/quality-profile', qualityProfile.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/quality-profile', qualityProfile.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'quality-profile/'+ qualityProfile.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="qualityProfiles && qualityProfiles.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

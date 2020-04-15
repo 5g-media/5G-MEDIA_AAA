@@ -1,0 +1,87 @@
+<div>
+    <h2 id="page-heading">
+        <span>Acc Vdu Sessions</span>
+        <!--
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-acc-vdu-session" [routerLink]="['/acc-vdu-session/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Acc Vdu Session
+            </span>
+        </button>
+        -->
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="accVduSessions">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="vduId"><span>Vdu Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nfvipopId"><span>Nfvipop Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="flavorCpuCount"><span>Flavor cpu count</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="flavorMemoryMb"><span>Flavor memory mb</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="flavorDiskGb"><span>Flavor disk gb</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="timestampStart"><span>Timestamp Start</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="timestampStop"><span>Timestamp Stop</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="vduTypeEnum"><span>Vdu Type Enum</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="accVnfSessionId"><span>Acc Vnf Session</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let accVduSession of accVduSessions ;trackBy: trackId">
+                <td><a [routerLink]="['/acc-vdu-session', accVduSession.id, 'view' ]">{{accVduSession.id}}</a></td>
+                <td>{{accVduSession.vduId}}</td>
+                <td>{{accVduSession.nfvipopId}}</td>
+                <td>{{accVduSession.flavorCpuCount}}</td>
+                <td>{{accVduSession.flavorMemoryMb}}</td>
+                <td>{{accVduSession.flavorDiskGb}}</td>
+                <td>{{accVduSession.timestampStart | dateFormatter}}</td>
+                <td>{{accVduSession.timestampStop | dateFormatter}}</td>
+                <td>{{accVduSession.vduTypeEnum}}</td>
+                <td>
+                    <div *ngIf="accVduSession.accVnfSessionId">
+                        <a [routerLink]="['../acc-vnf-session', accVduSession.accVnfSessionId , 'view' ]" >{{accVduSession.accVnfSessionId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/acc-vdu-session', accVduSession.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <!--
+                        <button type="submit"
+                                [routerLink]="['/acc-vdu-session', accVduSession.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'acc-vdu-session/'+ accVduSession.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                        -->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="accVduSessions && accVduSessions.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

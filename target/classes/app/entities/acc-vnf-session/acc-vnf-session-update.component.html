@@ -1,0 +1,81 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-acc-vnf-session-heading">Create or edit a Acc Vnf Session</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!accVnfSession.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="accVnfSession.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vnfId">Vnf Id</label>
+                    <input type="text" class="form-control" name="vnfId" id="field_vnfId"
+                        [(ngModel)]="accVnfSession.vnfId" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.vnfId?.dirty && editForm.controls.vnfId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.vnfId?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.vnfId?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vnfName">Vnf Name</label>
+                    <input type="text" class="form-control" name="vnfName" id="field_vnfName"
+                        [(ngModel)]="accVnfSession.vnfName" required maxlength="250"/>
+                    <div [hidden]="!(editForm.controls.vnfName?.dirty && editForm.controls.vnfName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.vnfName?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.vnfName?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_timestampStart">Timestamp Start</label>
+                    <input type="number" class="form-control" name="timestampStart" id="field_timestampStart"
+                        [(ngModel)]="accVnfSession.timestampStart" required/>
+                    <div [hidden]="!(editForm.controls.timestampStart?.dirty && editForm.controls.timestampStart?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.timestampStart?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.timestampStart?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_timestampStop">Timestamp Stop</label>
+                    <input type="number" class="form-control" name="timestampStop" id="field_timestampStop"
+                        [(ngModel)]="accVnfSession.timestampStop" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_accNsSession">Acc Ns Session</label>
+                    <select class="form-control" id="field_accNsSession" name="accNsSession" [(ngModel)]="accVnfSession.accNsSessionId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="accNsSessionOption.id" *ngFor="let accNsSessionOption of accnssessions; trackBy: trackAccNsSessionById">{{accNsSessionOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

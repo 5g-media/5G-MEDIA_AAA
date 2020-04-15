@@ -1,0 +1,147 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-resource-cost-heading">Create or edit a Resource Cost</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!resourceCost.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="resourceCost.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="resourceCost.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nfvipopId">Nfvipop Id</label>
+                    <input type="text" class="form-control" name="nfvipopId" id="field_nfvipopId"
+                        [(ngModel)]="resourceCost.nfvipopId" required/>
+                    <div [hidden]="!(editForm.controls.nfvipopId?.dirty && editForm.controls.nfvipopId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nfvipopId?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_billing">Billing</label>
+                    <input type="text" class="form-control" name="billing" id="field_billing"
+                        [(ngModel)]="resourceCost.billing" required/>
+                    <div [hidden]="!(editForm.controls.billing?.dirty && editForm.controls.billing?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.billing?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cpu">Cpu</label>
+                    <input type="number" class="form-control" name="cpu" id="field_cpu"
+                        [(ngModel)]="resourceCost.cpu" required/>
+                    <div [hidden]="!(editForm.controls.cpu?.dirty && editForm.controls.cpu?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.cpu?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.cpu?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_memoryGB">Memory GB</label>
+                    <input type="number" class="form-control" name="memoryGB" id="field_memoryGB"
+                        [(ngModel)]="resourceCost.memoryGB" required/>
+                    <div [hidden]="!(editForm.controls.memoryGB?.dirty && editForm.controls.memoryGB?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.memoryGB?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.memoryGB?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_diskGB">Disk GB</label>
+                    <input type="number" class="form-control" name="diskGB" id="field_diskGB"
+                        [(ngModel)]="resourceCost.diskGB" required/>
+                    <div [hidden]="!(editForm.controls.diskGB?.dirty && editForm.controls.diskGB?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.diskGB?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.diskGB?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_gpu">Gpu</label>
+                    <input type="number" class="form-control" name="gpu" id="field_gpu"
+                        [(ngModel)]="resourceCost.gpu" required/>
+                    <div [hidden]="!(editForm.controls.gpu?.dirty && editForm.controls.gpu?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.gpu?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.gpu?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_trafficGB">Traffic GB</label>
+                    <input type="number" class="form-control" name="trafficGB" id="field_trafficGB"
+                        [(ngModel)]="resourceCost.trafficGB" required/>
+                    <div [hidden]="!(editForm.controls.trafficGB?.dirty && editForm.controls.trafficGB?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.trafficGB?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.trafficGB?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_totalCost">Total Cost</label>
+                    <input type="number" class="form-control" name="totalCost" id="field_totalCost"
+                        [(ngModel)]="resourceCost.totalCost" required/>
+                    <div [hidden]="!(editForm.controls.totalCost?.dirty && editForm.controls.totalCost?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.totalCost?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.totalCost?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

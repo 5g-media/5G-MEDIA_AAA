@@ -1,4 +1,4 @@
-###5G-MEDIA AAA portal
+### 5G-MEDIA AAA portal
 
 This is the 5G-MEDIA AAA portal, which includes 
 * web portal
@@ -46,3 +46,7 @@ cd docker/5gmedia_keycloak
 docker-compose up
 open http://localhost:8080
 ```
+
+### Acknowledgements
+
+This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 761699. The dissemination of results herein reflects only the author’s view and the European Commission is not responsible for any use that may be made of the information it contains.
